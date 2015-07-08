@@ -28,3 +28,13 @@ build_script:
   - C:\Ruby21\DevKit\devkitvars.bat
   - echo %PATH%
   - bundle exec rake build
+
+artifacts:
+  - path: knap-build\var\knapsack\packages\openssl\*
+    name: openssl
+
+deploy:
+  provider: Github
+  auth_token:
+    secure: G+598xUH69Q0aWKWUU/Q2juXBusyRdrBSarvw+UALpJJPTvmv97LN4/qT+9I2ha3
+  draft: true
