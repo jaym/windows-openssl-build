@@ -19,7 +19,7 @@ install:
   - echo %PATH%
   - ruby --version
   - gem --version
-  - gem install bundler --quite --no-ri --no-rdoc
+  - gem install bundler --no-ri --no-rdoc
   - bundler --version
 
 build_script:
