@@ -24,6 +24,6 @@ install:
 
 build_script:
   - bundle install || bundle install || bundle install
-  - C:\Ruby%ruby_version%\DevKit\devkitvars.bat
+  - C:\Ruby21\DevKit\devkitvars.bat
   - echo %PATH%
   - bundle exec rake build
