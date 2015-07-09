@@ -37,4 +37,6 @@ deploy:
   provider: Github
   auth_token:
     secure: G+598xUH69Q0aWKWUU/Q2juXBusyRdrBSarvw+UALpJJPTvmv97LN4/qT+9I2ha3
-  draft: true
+  on:
+    branch: master
+    appveyor_repo_tag: true
