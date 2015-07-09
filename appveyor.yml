@@ -19,11 +19,24 @@ install:
   - echo %PATH%
   - ruby --version
   - gem --version
-  - gem install bundler --quite --no-ri --no-rdoc
+  - gem install bundler --no-ri --no-rdoc
   - bundler --version
+  - cp C:\Ruby21\DevKit\mingw\bin\bsdtar.exe C:\Ruby21\DevKit\bin\tar.exe
 
 build_script:
   - bundle install || bundle install || bundle install
-  - C:\Ruby%ruby_version%\DevKit\devkitvars.bat
+  - C:\Ruby21\DevKit\devkitvars.bat
   - echo %PATH%
   - bundle exec rake build
+
+artifacts:
+  - path: knap-build\var\knapsack\packages\openssl\*
+    name: openssl
+
+deploy:
+  provider: Github
+  auth_token:
+    secure: G+598xUH69Q0aWKWUU/Q2juXBusyRdrBSarvw+UALpJJPTvmv97LN4/qT+9I2ha3
+  on:
+    branch: master
+    appveyor_repo_tag: true
