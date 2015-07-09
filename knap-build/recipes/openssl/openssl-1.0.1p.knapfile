@@ -1,7 +1,8 @@
 recipe "openssl", "1.0.1p" do
   use :autotools
 
-  fetch "https://www.openssl.org/source/openssl-1.0.1p.tar.gz",
+  # Source: https://www.openssl.org/source/openssl-1.0.1p.tar.gz
+  fetch "http://opscode-omnibus-cache.s3.amazonaws.com/openssl-1.0.1p-7563e92327199e0067ccd0f79f436976",
     :md5 => "7563e92327199e0067ccd0f79f436976"
   depends_on "zlib"
 
