@@ -7,6 +7,7 @@ platform:
 environment:
   matrix:
     - ruby_version: "200"
+    - ruby_version: "200-x64"
 
 clone_folder: c:\projects\openssl
 
@@ -21,11 +22,11 @@ install:
   - gem --version
   - gem install bundler --no-ri --no-rdoc
   - bundler --version
-  - cp C:\Ruby21\DevKit\mingw\bin\bsdtar.exe C:\Ruby21\DevKit\bin\tar.exe
+  - cp C:\Ruby21%ruby_version:~3%\DevKit\mingw\bin\bsdtar.exe C:\Ruby21%ruby_version:~3%\DevKit\bin\tar.exe
 
 build_script:
   - bundle install || bundle install || bundle install
-  - C:\Ruby21\DevKit\devkitvars.bat
+  - C:\Ruby21%ruby_version:~3%\DevKit\devkitvars.bat
   - echo %PATH%
   - bundle exec rake build
 
