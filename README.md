@@ -12,6 +12,7 @@ To build, you need a working [DevKit](http://rubyinstaller.org/add-ons/devkit/) 
 You can install Ruby from [RubyInstaller](http://rubyinstaller.org/downloads/). Once both are installed,
 you will need to make sure that you have a working `tar.exe` in your path. This can be acheived by copying
 `bsdtar.exe` from mingw. For example, `cp C:\Ruby21\DevKit\mingw\bin\bsdtar.exe C:\Ruby21\DevKit\bin\tar.exe`.
+You will also need a `curl.exe`. You can use chocolatey to acquire curl from <https://chocolatey.org/packages/curl>.
 
 Now, you will need to activate DevKit. Assuming you are using powershell, this can be done by running
 `C:\Ruby21\DevKit\devkitvars.ps1`. This will add the GCC compiler toolcahin to your path.
