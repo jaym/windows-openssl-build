@@ -30,7 +30,7 @@ build_script:
   - bundle install || bundle install || bundle install
   - C:\Ruby21%ruby_version:~3%\DevKit\devkitvars.bat
   - echo %PATH%
-  - bundle exec rake build
+  - bundle exec rake
 
 artifacts:
   - path: knap-build\var\knapsack\packages\openssl\*
