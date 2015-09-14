@@ -35,6 +35,8 @@ build_script:
 artifacts:
   - path: knap-build\var\knapsack\packages\openssl\*
     name: openssl
+  - path: knap-build\var\knapsack\packages\openssl-fips\*
+    name: openssl-fips
 
 deploy:
   provider: GitHub

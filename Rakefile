@@ -17,6 +17,7 @@ end
 desc "Build openssl-fips"
 task :build_fips do
   Dir.chdir("./knap-build") do
+    sh "./bin/knap-build.bat openssl-fips --package -V"
     sh "./bin/knap-build.bat openssl -v #{OPENSSL_VERSION}.fips --package -V"
   end
 end
