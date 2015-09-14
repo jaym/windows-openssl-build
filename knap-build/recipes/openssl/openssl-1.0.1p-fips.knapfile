@@ -15,6 +15,10 @@ recipe "openssl", "1.0.1p.fips" do
   end
 
   action :configure do
+    fips_module = dependencies.find do |dep|
+      dep.name == 'openssl-fips'
+    end
+    ENV['FIPSDIR'] = fips_module.install_path
     work_configure = work_path("Configure")
     conf_contents = File.read work_configure
     conf_contents.sub!(/ -DOPENSSL_USE_APPLINK/, '')
