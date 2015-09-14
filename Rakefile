@@ -1,6 +1,12 @@
 
 OPENSSL_VERSION = IO.read(File.expand_path("../OPENSSL_VERSION", __FILE__)).strip
 
+if ENV['fips'] == 'true'
+  task :default => [:build_fips]
+else
+  task :default => [:build]
+end
+
 desc "Build openssl #{OPENSSL_VERSION}"
 task :build do
   Dir.chdir("./knap-build") do
