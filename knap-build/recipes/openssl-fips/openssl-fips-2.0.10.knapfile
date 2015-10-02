@@ -1,0 +1,38 @@
+recipe "openssl-fips", "2.0.10" do
+  use :autotools
+
+  fetch "http://www.openssl.org/source/openssl-fips-2.0.10.tar.gz",
+    :sha256 => "a42ccf5f08a8b510c0c78da1ba889532a0ce24e772b576604faf09b4d6a0f771"
+
+  before :extract do
+    # ignore symlink errors from package
+    if platform.mingw?
+      options.ignore_extract_errors = true
+    end
+  end
+
+  action :configure do
+    cmd = ["perl"]
+    if platform.posix?
+      cmd << "config"
+    else
+      cmd << "Configure"
+    end
+
+    if platform.mingw?
+      if platform.x64?
+        cmd << "mingw64"
+      else
+        cmd << "mingw"
+      end
+    end
+
+    cmd << "--prefix=#{install_path}"
+
+    run cmd.join(" ")
+  end
+
+  after :configure do
+    ENV['FIPSDIR'] = install_path
+  end
+end
