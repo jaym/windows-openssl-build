@@ -1,0 +1,47 @@
+recipe "openssl", "1.0.1q.fips" do
+  use :autotools
+
+  fetch "https://openssl.org/source/openssl-1.0.1q.tar.gz",
+    :sha256 => "b3658b84e9ea606a5ded3c972a5517cd785282e7ea86b20c78aa4b773a047fb7"
+  depends_on "zlib"
+  depends_on "openssl-fips"
+
+  before :extract do
+    # ignore symlink errors from package
+    if platform.mingw?
+      options.ignore_extract_errors = true
+    end
+  end
+
+  action :configure do
+    fips_module = dependencies.find do |dep|
+      dep.name == 'openssl-fips'
+    end
+    ENV['FIPSDIR'] = fips_module.install_path
+    work_configure = work_path("Configure")
+    conf_contents = File.read work_configure
+    conf_contents.sub!(/ -DOPENSSL_USE_APPLINK/, '')
+    File.open(work_configure, "wb") do |f|
+      f.puts conf_contents
+    end
+    cmd = ["perl"]
+    if platform.posix?
+      cmd << "config"
+    else
+      cmd << "Configure"
+    end
+
+    if platform.mingw?
+      if platform.x64?
+        cmd << "mingw64"
+      else
+        cmd << "mingw"
+      end
+    end
+
+    cmd << "zlib-dynamic shared fips"
+    cmd << "--prefix=#{install_path}"
+
+    run cmd.join(" ")
+  end
+end
